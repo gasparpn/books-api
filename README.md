@@ -59,6 +59,9 @@ Para verificar o status da aplicação utilize o seguinte endpoint:
 http://localhost:8080/actuator/health
 ```
 
+Obs.: O arquivo `agriness.postman_collection.json` contém uma colection que pode ser importada para uma aplicação
+que executa requisições http, como o [postman](https://www.postman.com/). Facilitando assim, testar manualmente a aplicação.
+
 ### Build
 Para fazer Build do Projeto
 ```
