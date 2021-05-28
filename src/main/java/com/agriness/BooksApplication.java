@@ -1,4 +1,4 @@
-package com.agriness.books;
+package com.agriness;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
