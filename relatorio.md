@@ -18,3 +18,8 @@ Decidi não usar TDD. Os testes serão escritos após as funcionalidades serem i
 
 - Gastei muito tempo tendo problemas com o H2, deixei para última hora e acabou que ficou muito apertado o tempo.
     - Decidi usar MYSQL dentro de um container e foi mais fácil de configurar.
+  
+- Como não fiz nenhum sistema de login para identificar o usuário logado, decidi alterar o endpoint de reserva de livro
+para receber o id do cliente que está solicitando a reserva.
+  
+- Não entendi bem o que deveria ser feita na apresentação da informação de multa dos livros.
