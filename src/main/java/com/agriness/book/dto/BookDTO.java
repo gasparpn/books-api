@@ -3,6 +3,8 @@ import com.agriness.book.entity.Book;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,4 +23,20 @@ public class BookDTO {
     private LocalDateTime lastRentDate;
 
     private Long client_id;
+
+    public static List<BookDTO> fromListBookToListBookDTO(Iterable<Book> books){
+        List<BookDTO> booksDTO = new ArrayList<>();
+        books.forEach( book -> { booksDTO.add(BookDTO.fromBookToBookDTO(book)); });
+        return booksDTO;
+    }
+
+    public static BookDTO fromBookToBookDTO(Book book){
+        return BookDTO.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .status(book.getStatus())
+                .lastRentDate(book.getLastRentDate())
+                .client_id(book.getClient().getId())
+                .build();
+    }
 }

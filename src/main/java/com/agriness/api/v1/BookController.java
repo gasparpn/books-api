@@ -3,38 +3,36 @@ package com.agriness.api.v1;
 
 import com.agriness.book.dto.BookDTO;
 import com.agriness.book.entity.Book;
-import com.agriness.book.repository.BookRepository;
+import com.agriness.book.service.BookService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("books")
+@RequestMapping("")
 public class BookController {
 
-    private BookRepository bookRepository;
+    private BookService bookService;
 
-    public BookController(BookRepository bookRepository) {this.bookRepository = bookRepository;}
+    public BookController(BookService bookService) { this.bookService = bookService; }
 
-    @GetMapping(value = "")
-    @ResponseBody
-    public List<BookDTO> getBooks(){
-        Iterable<Book> books = bookRepository.findAll();
-        List<BookDTO> booksDTO = new ArrayList<>();
-        books.forEach( book -> {
-            booksDTO.add(BookDTO.builder()
-                    .id(book.getId())
-                    .title(book.getTitle())
-                    .status(book.getStatus())
-                    .lastRentDate(book.getLastRentDate())
-                    .client_id(book.getClient().getId())
-                    .build());
-        });
-        return booksDTO;
+    @GetMapping(value = "/books")
+    public ResponseEntity<List<BookDTO>> getAllBooks(){
+        Iterable<Book> books = this.bookService.getAllBooks();
+        return ResponseEntity.ok(BookDTO.fromListBookToListBookDTO(books));
+    }
+
+    @GetMapping("/client/{clientId}/books")
+    public ResponseEntity<List<BookDTO>> getBooksByClientId(@PathVariable Long clientId){
+        List<Book> books = this.bookService.getBooksByClientId(clientId);
+        return ResponseEntity.ok(BookDTO.fromListBookToListBookDTO(books));
+    }
+
+    @PostMapping("books/{bookId}/reserve")
+    public ResponseEntity<BookDTO> reserveBook(@PathVariable Long bookId, @RequestParam Long clientId){
+        Book book = this.bookService.setBookAsReserved(bookId, clientId);
+        BookDTO bookDTO = BookDTO.fromBookToBookDTO(book);
+        return ResponseEntity.ok(bookDTO);
     }
 }
