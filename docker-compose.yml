@@ -1,0 +1,16 @@
+version: "3.4"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: book-db
+    networks:
+      - default
+    volumes:
+     - /mysql/book/:/var/lib/book
+    environment:
+      MYSQL_PASSWORD: bookstore
+      MYSQL_DATABASE: books-db
+      MYSQL_USER: books
+      MYSQL_ROOT_PASSWORD: bookstore
+    ports:
+      - 3306:3306
