@@ -1,9 +1,11 @@
 # Desafio backend Agriness
 
+API de reserva de livros utilizando Java e Spring Boot.
+
 ## Requirements
   - OpenJDK 11
   - Docker
-  - Docker-composer (Desenvolvimento)
+  - Docker-composer
   - Gradlew
 
 ## Swagger/OpenApi
@@ -25,8 +27,7 @@ src/main/java/br/com/ftd/lti/ltiapi/v1
 |   └── service
 ```
 
-* `API`: Arquivos relacionados a endpoints
-* `configuration`: Arquivos e pacotes relacionados a configurações da aplicação, como beans que precisam ser iniciados.
+* `API`: Controllers da aplicação
 
 Dentro da estrutura do projeto, as resposabilidades serão isoladas por domínio, que podem ser chamadados de app, cada app terá uma estrutura para administrar os objetos dentro desse domínio. Por exemplo, a pasta books contém arquivo que é necessário para gerencias as regras relacionadas a livros.
 Dentro de cada app pode existir os seguintes arquivos:
